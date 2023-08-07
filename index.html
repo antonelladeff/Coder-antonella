@@ -1,0 +1,96 @@
+<!DOCTYPE html> <!--Tipo de documento-->
+<html lang="es"> <!--Lenguaje del sitio-->
+
+<head> <!--Parte Privada del sitio-->
+  <meta charset="UTF-8"> <!--Leer caract. especiales (ñ,ò,$)-->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <!--compatibilidad con internet explorar - Edge-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Adapacion a dispositivos moviles-->
+  <title>B&B</title> <!--Titulo del sitio (lo que ven en la pestaña del navegador)-->
+
+  <!--favicon-->
+  <link rel="shortcut icon" href="./multimedia/sin-fondo.png" type="image/x-icon">
+
+  <!--google from-->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
+
+  <!--Bootstrap -->
+  <link rel="stylesheet" href="./css/bootstrap.min.css">
+
+  <!--estilos CSS--->
+  <link rel="stylesheet" href="./css/estilos.css">
+</head>
+
+<body> <!--Todo el contenido de nuestro sitio-->
+  <header>
+    <div class="logo">
+      <img src="./multimedia/sin-fondo.png" alt="logo de la compania">
+      <h1 class="nombredelaempresa">Odontología</h1>
+    </div>
+  </header>
+  <div>
+    <h2 class="solicitud">Solicitud de turno</h2>
+    <p class="parrafo"> Complete este formulario para solicitar un turno con nuestro equipo.
+      Le llamaremos a la mayor brevedad posible para asignar y confirmar el turno.
+      Los campos marcados con * son obligatorios.</p>
+  </div>
+  <main>
+    <form class="row g-3">
+      <div class="col-md-6">
+        <label for="inputEmail4" class="form-label">Email</label>
+        <input type="email" class="form-control" id="inputEmail4">
+      </div>
+      <div class="col-md-6">
+        <label for="inputPassword4" class="form-label">Password</label>
+        <input type="password" class="form-control" id="inputPassword4">
+      </div>
+      <div class="col-12">
+        <label for="inputAddress" class="form-label">Address</label>
+        <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+      </div>
+      <div class="col-12">
+        <label for="inputAddress2" class="form-label">Address 2</label>
+        <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+      </div>
+      <div class="col-md-6">
+        <label for="inputCity" class="form-label">City</label>
+        <input type="text" class="form-control" id="inputCity">
+      </div>
+      <div class="col-md-4">
+        <label for="inputState" class="form-label">State</label>
+        <select id="inputState" class="form-select">
+          <option selected>Choose...</option>
+          <option>...</option>
+        </select>
+      </div>
+      <div class="col-md-2">
+        <label for="inputZip" class="form-label">Zip</label>
+        <input type="text" class="form-control" id="inputZip">
+      </div>
+      <div class="col-12">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="gridCheck">
+          <label class="form-check-label" for="gridCheck">
+            Check me out
+          </label>
+        </div>
+      </div>
+      <div class="col-12">
+        <button type="submit" class="btn btn-primary">Sign in</button>
+      </div>
+    </form>
+
+
+    <!---scrip js de bootstrap---->
+    <script src="../js/bootstrap.min.js"></script>
+
+    <!-- codigo de javascript-->
+    <script src="./JS/app.js"></script>
+
+</body>
+
+</html>
