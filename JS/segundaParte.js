@@ -1,82 +1,99 @@
-let contraseña = "1234";
-function login() {
-  let ingresar = false;
+// Array de pacientes (objetos)
+let pacientes = [
+  { nombre: "Ana", apellido: "García", telefono: "1234567890", turno: 1 },
+  { nombre: "Luis", apellido: "Pérez", telefono: "9876543210", turno: 2 },
+  { nombre: "María", apellido: "Martínez", telefono: "5555555555", turno: 3 }
+];
 
-  for (let i = 2; i >= 0; i--) {
-    let userContraseña = prompt(
-      "Ingresa la contraseña. Tenés " + (i + 1) + " " + "Oportunidades"
-    );
-    if (userContraseña === contraseña) {
-      alert("Ingreso exitoso");
-      ingresar = true;
-      break;
-    } else {
-      alert("Error.Te quedan" + " " + i + "intentos");
-    }
-  }
-  return ingresar;
+// Función para agregar nuevo paciente al turno
+function agregarPaciente() {
+  const nombre = prompt("Ingrese el nombre del nuevo paciente:");
+  const apellido = prompt("Ingrese el apellido del nuevo paciente:");
+  const telefono = prompt("Ingrese el número de teléfono del nuevo paciente:");
+  const paciente = { nombre, apellido, telefono, turno: turnoActual };
+  pacientes.push(paciente);
+  turnoActual++;
+  alert(`Paciente ${nombre} ${apellido} agregado. Turno: ${paciente.turno}`);
 }
-console.log(login());
 
-let exito = login();
+// Función para buscar paciente por turno
+function buscarPacientePorTurno() {
+  const turno = parseInt(prompt("Ingrese el número de turno del paciente a buscar:"));
+  const pacienteEnTurno = pacientes.find(paciente => paciente.turno === turno);
+  if (pacienteEnTurno) {
+    alert(`Paciente en turno ${turno}:\nNombre: ${pacienteEnTurno.nombre}\nApellido: ${pacienteEnTurno.apellido}\nTeléfono: ${pacienteEnTurno.telefono}`);
+  } else {
+    alert(`No hay paciente en el turno ${turno}`);
+  }
+}
 
-// Definición de objetos
-class Odontologo {
-    constructor(nombre, especialidad, horario) {
-      this.nombre = nombre;
-      this.especialidad = especialidad;
-      this.horario = horario;
-    }
+// Función para filtrar pacientes por nombre
+function filtrarPacientesPorNombre() {
+  const nombre = prompt("Ingrese el nombre para filtrar pacientes:");
+  const pacientesFiltrados = pacientes.filter(paciente => paciente.nombre === nombre);
+  if (pacientesFiltrados.length > 0) {
+    let listaPacientes = `Pacientes con nombre ${nombre}:\n`;
+    pacientesFiltrados.forEach(paciente => {
+      listaPacientes += `Turno ${paciente.turno}: ${paciente.nombre} ${paciente.apellido}\n`;
+    });
+    alert(listaPacientes);
+  } else {
+    alert(`No se encontraron pacientes con nombre ${nombre}`);
   }
-  
-  class Turno {
-    constructor(id, paciente, fecha, hora, odontologo, obraSocial, costo) {
-      this.id = id;
-      this.paciente = paciente;
-      this.fecha = fecha;
-      this.hora = hora;
-      this.odontologo = odontologo;
-      this.obraSocial = obraSocial;
-      this.costo = costo;
-    }
+}
+
+// Función para atender al próximo paciente
+function atenderProximoPaciente() {
+  if (pacientes.length > 0) {
+    const pacienteAtendido = pacientes.shift();
+    alert(`Atendiendo a ${pacienteAtendido.nombre} ${pacienteAtendido.apellido} del turno ${pacienteAtendido.turno}`);
+  } else {
+    alert("No hay pacientes en espera.");
   }
+}
+
+// Función para mostrar la lista de pacientes
+function mostrarListaPacientes() {
+  console.log("Lista de pacientes:");
+  pacientes.forEach(paciente => {
+    console.log(`Turno ${paciente.turno}: ${paciente.nombre} ${paciente.apellido}`);
+  });
+}
+
+// Llamar a la función para mostrar la lista de pacientes
+mostrarListaPacientes();
+
+// Interacción con el usuario
+while (true) {
+  const accion = prompt("¿Qué acción deseas realizar?\n1. Agregar paciente\n2. Buscar paciente por turno\n3. Filtrar pacientes por nombre\n4. Atender próximo paciente\n5. Mostrar lista de pacientes\n6. Salir");
   
-  // Variables
-  let odontologos = [];
-  let turnosOdontologicos = [];
-  
-  // Funciones esenciales
-  function agregarOdontologo(nombre, especialidad, horario) {
-    const nuevoOdontologo = new Odontologo(nombre, especialidad, horario);
-    odontologos.push(nuevoOdontologo);
-    console.log(`Odontólogo ${nombre} agregado.`);
+  switch (accion) {
+    case "1":
+      agregarPaciente();
+      break;
+      
+    case "2":
+      buscarPacientePorTurno();
+      break;
+      
+    case "3":
+      filtrarPacientesPorNombre();
+      break;
+      
+    case "4":
+      atenderProximoPaciente();
+      break;
+      
+    case "5":
+      mostrarListaPacientes();
+      break;
+      
+    case "6":
+      console.log("Saliendo del programa.");
+      break;
+      
+    default:
+      alert("Opción inválida. Por favor, selecciona una opción válida.");
   }
-  
-  function agregarTurno(paciente, fecha, hora, odontologo, obraSocial, costo) {
-    const nuevoTurno = new Turno(turnosOdontologicos.length + 1, paciente, fecha, hora, odontologo, obraSocial, costo);
-    turnosOdontologicos.push(nuevoTurno);
-    console.log(`Turno para ${paciente} agendado.`);
-  }
-  
-  function buscarTurnosPorOdontologo(nombreOdontologo) {
-    return turnosOdontologicos.filter(turno => turno.odontologo.nombre.toLowerCase().includes(nombreOdontologo.toLowerCase()));
-  }
-  
-  function calcularIngresosTotales() {
-    return turnosOdontologicos.reduce((total, turno) => total + turno.costo, 0);
-  }
-  
-  // Agregar objetos y realizar acciones
-  agregarOdontologo("Dra. Martínez", "Odontología General", "Lunes a Viernes, 9:00 AM - 5:00 PM");
-  agregarOdontologo("Dr. Gómez", "Ortodoncia", "Martes y Jueves, 10:00 AM - 7:00 PM");
-  agregarTurno("Juan Pérez", "2023-08-15", "10:00 AM", odontologos[0], "OSDE", 800);
-  agregarTurno("María López", "2023-08-16", "11:30 AM", odontologos[1], "Swiss Medical", 750);
-  
-  // Búsqueda de turnos por odontólogo
-  const turnosDrGomez = buscarTurnosPorOdontologo("Gómez");
-  console.log("Turnos del Dr. Gómez:", turnosDrGomez);
-  
-  // Cálculo de ingresos totales
-  const ingresosTotales = calcularIngresosTotales();
-  console.log("Ingresos totales:", ingresosTotales);
-  
+}
+
