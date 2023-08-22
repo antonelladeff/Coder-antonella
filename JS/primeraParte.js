@@ -128,11 +128,6 @@ identificarDatos();
 primeraEleccion();
 
 
-//abstraccion resumir un grupo complejo de instrucciones bajo una palabra clave que generalmente es una function
-
-
-
-//dependiendo del dia veo que ropa llevo 
 
 
 
