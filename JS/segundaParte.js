@@ -21,7 +21,6 @@ let turnoActual = 0;
 
 // Función para agregar un nuevo paciente
 function agregarPaciente() {
-  // Incrementa el número de turno actual
   turnoActual++;
 
   const nombre = prompt("Ingrese el nombre del nuevo paciente:");
@@ -38,30 +37,23 @@ function agregarPaciente() {
 
 // Función para mostrar la lista de pacientes
 function mostrarListaPacientes() {
-  // Crea una variable para almacenar la lista de pacientes como una cadena de texto
   let listaPacientes = "Lista de pacientes:\n";
-
-
   for (const paciente of pacientes) {
     listaPacientes += paciente.mostrarInfo() + "\n";
   }
 
-  // Muestra una alerta con la lista de pacientes
   alert(listaPacientes);
 }
 
 // Función para buscar un paciente por número de turno
 function buscarPacientePorTurno() {
   const turno = parseInt(prompt("Ingrese el número de turno del paciente a buscar:"));
-
-
   const pacienteEnTurno = pacientes.find(paciente => paciente.turno === turno);
 
 
   if (pacienteEnTurno) {
     alert(`Paciente en turno ${turno}:\n${pacienteEnTurno.mostrarInfo()}`);
   } else {
-    // Si no encuentra un paciente, muestra un mensaje indicando que no hay paciente en ese turno
     alert(`No hay paciente en el turno ${turno}`);
   }
 }
@@ -69,11 +61,9 @@ function buscarPacientePorTurno() {
 // Función para filtrar pacientes por nombre
 function filtrarPacientesPorNombre() {
   const nombre = prompt("Ingrese el nombre para filtrar pacientes:");
-
-  
   const pacientesFiltrados = pacientes.filter(paciente => paciente.nombre === nombre);
 
-  // Si encuentra pacientes con el nombre ingresado, muestra su información
+
   if (pacientesFiltrados.length > 0) {
     let listaPacientes = `Pacientes con nombre ${nombre}:\n`;
     for (const paciente of pacientesFiltrados) {
@@ -113,7 +103,6 @@ function agregarProductoAPaciente() {
     if (!paciente.productos) {
       paciente.productos = [];
     }
-
     paciente.productos.push(producto);
     alert(`Producto ${producto.nombre} agregado al paciente ${paciente.nombre} ${paciente.apellido}`);
   } else {
