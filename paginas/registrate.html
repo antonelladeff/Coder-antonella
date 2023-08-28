@@ -53,34 +53,39 @@
     </header>
 <main>
     <div class="container mt-5">
-      <div class="row justify-content-center">
-        <div class="col-md-6">
-          <div class="card">
-            <div class="card-body">
-              <h4 class="text-center mb-4">¡Bienvenido de vuelta!</h4>
-              <form>
-                <div class="mb-3">
-                  <label for="username" class="form-label">Usuario</label>
-                  <input type="text" class="form-control" id="username" required>
-                </div>
-                <div class="mb-3">
-                  <label for="password" class="form-label">Contraseña</label>
-                  <input type="password" class="form-control" id="password" required>
-                </div>
-                <div class="d-grid">
-                  <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
+      <h1 class="mb-4">¡Bienvenido!</h1>
+      <div id="inicioSesion">
+        <h2>Iniciar Sesión</h2>
+        <input type="text" id="usuario" class="form-control mb-2" placeholder="Usuario">
+        <input type="password" id="contrasena" class="form-control mb-2" placeholder="Contraseña">
+        <button id="btnIniciarSesion" class="btn btn-primary">Iniciar Sesión</button>
+      </div>
+      <div id="formularioTurno" style="display: none;">
+        <h2>Programar Turno</h2>
+        <input type="text" id="nombrePaciente" class="form-control mb-2" placeholder="Nombre del Paciente">
+        <input type="number" id="edadPaciente" class="form-control mb-2" placeholder="Edad">
+        <input type="date" id="fechaTurno" class="form-control mb-2">
+        <input type="time" id="horaTurno" class="form-control mb-2">
+        <button id="btnProgramarTurno" class="btn btn-success">Programar Turno</button>
+      </div>
+      <div id="infoUsuario" style="display: none;">
+        <h2>Información del Usuario</h2>
+        <p id="nombreUsuario"></p>
+        <p id="rolUsuario"></p>
+      </div>
+      <div id="infoTurno" style="display: none;">
+        <h2>Información del Turno</h2>
+        <p id="infoPaciente"></p>
+        <p id="infoFecha"></p>
+        <p id="infoHora"></p>
       </div>
     </div>
-  </main>
+    </main>
 <footer class="text-white text-center py-3">
     <p>&copy; 2023 Turnos Online. Todos los derechos reservados.</p>
 </footer>
-
+ 
+<!--scrip js de bootstrap-->
+  <script src="../JS/bootstrap.min.js"></script>
 </body>
-
 </html>
