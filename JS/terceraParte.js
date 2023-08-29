@@ -1,80 +1,39 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const btnIniciarSesion = document.getElementById("btnIniciarSesion");
-  const btnProgramarTurno = document.getElementById("btnProgramarTurno");
-  const nombreUsuario = document.getElementById("nombreUsuario");
-  const rolUsuario = document.getElementById("rolUsuario");
-  const infoPaciente = document.getElementById("infoPaciente");
-  const infoFecha = document.getElementById("infoFecha");
-  const infoHora = document.getElementById("infoHora");
+// Capturamos el formulario
+const inicioFormulario = document.getElementById("inicio");
 
-  // Evento para iniciar sesión
-  btnIniciarSesion.addEventListener("click", () => {
-    const usuario = document.getElementById("usuario").value;
-    const contrasena = document.getElementById("contrasena").value;
+// Función para mostrar errores en el formulario
+const mostrarMensaje = (text) => {
+	// Capturamos la etiqueta p donde mostraremos mensajes
+	const mensajes = document.getElementById("mensajes");
+	mensajes.textContent = text;
+	mensajes.classList.remove("hide");
+	setTimeout(() => {
+		mensajes.textContent = "";
+		mensajes.classList.add("hide");
+	}, 2000);
+};
 
-    // Simulamos una autenticación exitosa
-    const usuarioAutenticado = {
-      id: 1,
-      nombre: usuario,
-      rol: "odontologo"
-    };
-
-    localStorage.setItem("usuario", JSON.stringify(usuarioAutenticado));
-    mostrarInfoUsuario(usuarioAutenticado);
-    mostrarFormularioTurno();
-  });
-
-  // Evento para programar turno
-  btnProgramarTurno.addEventListener("click", () => {
-    const nombrePaciente = document.getElementById("nombrePaciente").value;
-    const edadPaciente = document.getElementById("edadPaciente").value;
-    const fechaTurno = document.getElementById("fechaTurno").value;
-    const horaTurno = document.getElementById("horaTurno").value;
-
-    const pacienteTurno = {
-      paciente: {
-        nombre: nombrePaciente,
-        edad: edadPaciente
-      },
-      fecha: fechaTurno,
-      hora: horaTurno
-    };
-
-    localStorage.setItem("turno", JSON.stringify(pacienteTurno));
-    mostrarInfoTurno(pacienteTurno);
-  });
-
-  // Función para mostrar información de usuario
-  function mostrarInfoUsuario(usuario) {
-    nombreUsuario.textContent = "Nombre: " + usuario.nombre;
-    rolUsuario.textContent = "Rol: " + usuario.rol;
-    document.getElementById("inicioSesion").style.display = "none";
-    document.getElementById("infoUsuario").style.display = "block";
-  }
-
-  // Función para mostrar el formulario de turno
-  function mostrarFormularioTurno() {
-    document.getElementById("formularioTurno").style.display = "block";
-  }
-
-  // Función para mostrar información de turno
-  function mostrarInfoTurno(turno) {
-    infoPaciente.textContent = "Paciente: " + turno.paciente.nombre + " (Edad: " + turno.paciente.edad + ")";
-    infoFecha.textContent = "Fecha: " + turno.fecha;
-    infoHora.textContent = "Hora: " + turno.hora;
-    document.getElementById("formularioTurno").style.display = "none";
-    document.getElementById("infoTurno").style.display = "block";
-  }
-
-  // Verificar si el usuario está autenticado al cargar la página
-  const usuarioGuardado = JSON.parse(localStorage.getItem("usuario"));
-  if (usuarioGuardado) {
-    mostrarInfoUsuario(usuarioGuardado);
-    const turnoGuardado = JSON.parse(localStorage.getItem("turno"));
-    if (turnoGuardado) {
-      mostrarInfoTurno(turnoGuardado);
-    } else {
-      mostrarFormularioTurno();
-    }
-  }
+// Agregamos el evento submit
+inicioFormulario.addEventListener("submit", (e) => {
+	// Prevenimos que se recargue la página
+	e.preventDefault();
+	// Capturamos el input nombre
+	const nombre = document.getElementById("nombre").value;
+	// Capturamos el input password
+	const pass = document.getElementById("password").value;
+	// Buscamos si hay algún usuario que coincida con el nombre que ingresaron
+	const user = usuarios.find((user) => user.nombre === nombre);
+	// Si existe el usuario, revisamos su contraseña
+	if (user) {
+		// Si la contraseña es correcta, se redirecciona a la página que queramos
+		if (pass === user.password) {
+			location.href = "./index.html";
+		} else {
+			// Si la contraseña es incorrecta, mostramos un mensaje
+			mostrarMensaje("Contraseña incorrecta.");
+		}
+	} else {
+		// Si no existe usuario, mostramos un mensaje
+		mostrarMensaje("Nombre incorrecto.");
+	}
 });
