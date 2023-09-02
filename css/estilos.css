@@ -14,7 +14,7 @@ header {
 }
 
 main {
-  padding: 50px 0;
+  min-height: 78vh
 }
 
 .card {
@@ -50,6 +50,8 @@ main {
 footer {
   background-color: #343a40;
   color: #fff;
-  padding: 15px 0;
+
 }
+
+
 

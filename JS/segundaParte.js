@@ -22,7 +22,6 @@ let turnoActual = 0;
 // Función para agregar un nuevo paciente
 function agregarPaciente() {
   turnoActual++;
-
   const nombre = prompt("Ingrese el nombre del nuevo paciente:");
   const apellido = prompt("Ingrese el apellido del nuevo paciente:");
   const telefono = prompt("Ingrese el número de teléfono del nuevo paciente:");
@@ -62,8 +61,7 @@ function buscarPacientePorTurno() {
 function filtrarPacientesPorNombre() {
   const nombre = prompt("Ingrese el nombre para filtrar pacientes:");
   const pacientesFiltrados = pacientes.filter(paciente => paciente.nombre === nombre);
-
-
+  
   if (pacientesFiltrados.length > 0) {
     let listaPacientes = `Pacientes con nombre ${nombre}:\n`;
     for (const paciente of pacientesFiltrados) {
