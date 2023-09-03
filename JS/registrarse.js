@@ -1,6 +1,3 @@
-// Definir una matriz vacía para almacenar los usuarios registrados
-const usuarios = [];
-
 // Capturamos el formulario de registro
 const registroForm = document.getElementById("registroForm");
 
@@ -28,25 +25,24 @@ registroForm.addEventListener("submit", (e) => {
             usuarios.push({
                 nombre: nombre,
                 correo: correo,
-                password: contraseña, // Debes encriptar la contraseña en un entorno real
+                password: contraseña, 
             });
 
             mostrarMensajeRegistro("Registro exitoso. Ahora puedes iniciar sesión.");
             registroForm.reset(); // Limpiar el formulario
 
-            // Redirigir a la página de inicio de sesión después de un breve retraso (por ejemplo, 2 segundos)
+            localStorage.setItem(usuario)
+            // Redirigir a la página de inicio de sesión después de un breve retraso
             setTimeout(() => {
-                window.location.href = "../index.html"; // 
+                window.location.href = "../index.html"; 
             }, 2000); // 2000 milisegundos (2 segundos)
+
+            localStorage.setItem ('usuarios',JSON.stringify(usuarios));
         }
     }
 });
 
-// Función para mostrar mensajes de registro
-const mostrarMensajeRegistro = (text) => {
-    const mensajesRegistro = document.createElement("div");
-    mensajesRegistro.textContent = text;
-    mensajesRegistro.classList.add("alert", "alert-success", "mt-3");
-    document.body.appendChild(mensajesRegistro);
-
-};
+function mostrarMensajeRegistro(mensaje) {
+    const mensajeRegistro = document.getElementById("mensajeRegistro");
+    mensajeRegistro.textContent = mensaje;
+}

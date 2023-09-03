@@ -1,9 +1,11 @@
+const arrayUsuarios = JSON.parse (localStorage.getItem("usuario")) || usuarios ;
+
 // Capturamos el formulario
-const inicioFormulario = document.getElementById("inicio");
+const inicioFormulario = document.getElementById("inicio") 
 
 // Función para mostrar errores en el formulario
 const mostrarMensaje = (text) => {
-    // Capturamos la etiqueta p donde mostraremos mensajes
+    // Capturamos la etiqueta para donde mostraremos mensajes
     const mensajes = document.getElementById("mensajes");
     mensajes.textContent = text;
     mensajes.classList.remove("hide");
@@ -28,9 +30,14 @@ inicioFormulario.addEventListener("submit", (e) => {
         // Si la contraseña es correcta, se redirecciona a la página que queramos
         if (contraseña === user.password) { // Comparamos la contraseña
             // Guardar el nombre de usuario y contraseña en localStorage
+            const loguedIn = {
+                nombre: user.nombre,
+                pass: user.password,
+                isLogued: true,
+            }
             localStorage.setItem("nombreUsuario", nombre);
-            localStorage.setItem("contraseñaUsuario", contraseña);
-            location.href = "./paginas/turnero.html";
+
+            location.href = "../paginas/turnero.html";
         } else {
             // Si la contraseña es incorrecta, mostramos un mensaje
             mostrarMensaje("Contraseña incorrecta.");
@@ -41,5 +48,12 @@ inicioFormulario.addEventListener("submit", (e) => {
     }
 });
 
+function isLogueIn() {
 
-
+    const loguedIn = JSON.parse(localStorange.getItem('isLogued'))
+    if (loguedIn.isLogued) {
+        location.href = "./paginas/turnero.html";
+    } else {
+        return;
+    }
+} 
