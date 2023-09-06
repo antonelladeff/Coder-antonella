@@ -37,7 +37,7 @@ inicioFormulario.addEventListener("submit", (e) => {
             }
             localStorage.setItem("nombreUsuario", nombre);
 
-            location.href = "../paginas/turnero.html";
+           location.href = "./paginas/turnero.html";
         } else {
             // Si la contraseña es incorrecta, mostramos un mensaje
             mostrarMensaje("Contraseña incorrecta.");
@@ -49,7 +49,6 @@ inicioFormulario.addEventListener("submit", (e) => {
 });
 
 function isLogueIn() {
-
     const loguedIn = JSON.parse(localStorange.getItem('isLogued'))
     if (loguedIn.isLogued) {
         location.href = "./paginas/turnero.html";

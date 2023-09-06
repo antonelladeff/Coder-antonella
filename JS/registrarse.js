@@ -27,20 +27,21 @@ registroForm.addEventListener("submit", (e) => {
                 correo: correo,
                 password: contraseña, 
             });
-
+           
+            localStorage.setItem ('usuarios',JSON.stringify(usuarios));
+            
             mostrarMensajeRegistro("Registro exitoso. Ahora puedes iniciar sesión.");
             registroForm.reset(); // Limpiar el formulario
 
-            localStorage.setItem(usuario)
             // Redirigir a la página de inicio de sesión después de un breve retraso
             setTimeout(() => {
                 window.location.href = "../index.html"; 
             }, 2000); // 2000 milisegundos (2 segundos)
 
-            localStorage.setItem ('usuarios',JSON.stringify(usuarios));
         }
     }
 });
+
 
 function mostrarMensajeRegistro(mensaje) {
     const mensajeRegistro = document.getElementById("mensajeRegistro");
