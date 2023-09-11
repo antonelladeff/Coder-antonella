@@ -39,54 +39,39 @@
     </div>
 </header>
   <main>
-    <section class="container my-4">
-      <div class="card p-4">
-        <h2 class="mb-4">Complete sus datos:</h2>
-        <form action="" method="POST">
-          <div class="form-group">
-            <label for="nombre">Nombre:</label>
-            <input type="text" id="nombre" name="nombre" class="form-control" required>
-          </div>
-          <div class="form-group">
-            <label for="apellido">Apellido:</label>
-            <input type="text" id="apellido" name="apellido" class="form-control" required>
-          </div>
-          <div class="form-group">
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" class="form-control" required>
-          </div>
-          <div class="form-group">
-            <label for="fecha">Fecha del Turno:</label>
-            <input type="date" id="fecha" name="fecha" class="form-control" required>
-          </div>
-          <div class="form-group">
-            <label for="hora">Hora del Turno:</label>
-            <input type="time" id="hora" name="hora" class="form-control" required>
-          </div>
-          <div class="form-group">
-            <label for="obrasSociales">Obra Social:</label>
-            <select id="obrasSociales" name="obrasSociales" class="form-control" required>
-              <option value="" disabled selected>Selecciona una obra social</option>
-              <option value="obra1">Seros</option>
-              <option value="obra2">Osde</option>
-              <option value="obra3">Dasu</option>
-              <option value="obra1">Osprera</option>
-              <option value="obra2">Camioneros</option>
-              <option value="obra3">Jerarquicos Salud</option>
-            </select>
-          </div>
-          </div>
-          <button type="submit" class="btn btn-primary">Solicitar Turno</button>
-        </form>
-      </div>
-    </section>
+     <div class="container mt-5">
+        <h1 class ="profe">Profesionales</h1>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="profesional">
+                    <h2>Dr. Bartels Sergio</h2>
+                    <p>Especialidad: Odontologo,
+                      Cirujano Maxilofacial</p>
+                    <a href="../paginas/dr.bartels.html" class="reservar-btn">Reservar Turno</a>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="profesional">
+                    <h2>Dra. Cisneros Maria</h2>
+                    <p>Especialidad: Odontologa</p>
+                    <a href="../paginas/dra.cisneros.html" class="reservar-btn">Reservar Turno</a>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="profesional">
+                    <h2>Dra.Yordanoff Claudia</h2>
+                    <p>Especialidad: Odontologa</p>
+                    <a href="../paginas/dra.yordanoff.html" class="reservar-btn">Reservar Turno</a>
+                </div>
+            </div>
+        </div>
+    </div>
   </main>
-  <footer class=" text-white text-center py-3">
+  <footer class="text-white text-center py-3">
     <p>&copy; 2023 Turno Online Odontológico. Todos los derechos reservados.</p>
   </footer>
   <!--scrip js de javascripts-->
   <script src="../JS/tunero.js"></script>
 </body>
-
 </html>
 
