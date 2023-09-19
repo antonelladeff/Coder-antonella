@@ -1,11 +1,11 @@
 /* Estilos personalizados */
 
 body {
-  font-family:Arial, Helvetica, sans-serif ;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 header {
-  background-color:#007bff;
+  background-color: #007bff;
 
 }
 
@@ -26,7 +26,7 @@ main {
 .card-title {
   font-size: 1.5rem;
   margin-bottom: 1rem;
- 
+
 }
 
 .form-label {
@@ -54,28 +54,31 @@ main {
   padding: 30px;
   margin: 30px;
   text-align: center;
- 
+  justify-content: center;
+
 }
 
 
-/* Estilo para los botones de reserva */
 .reservar-btn {
   background-color: #007bff;
   color: white;
   border: none;
   padding: 10px 20px;
-  
+
 
 }
-.profe{
-text-align: center;
-font-size: 40px;
-font-weight: bolder;
+
+.profe {
+  text-align: center;
+  font-size: 40px;
+  font-weight: bolder;
 
 }
+
 /* Estilo para los botones de reserva al pasar el ratón por encima */
 .reservar-btn:hover {
-  background-color: #0056b3;;
+  background-color: #0056b3;
+  ;
 }
 
 
@@ -98,11 +101,13 @@ h3 {
 /* Estilos para la tabla de horarios */
 .table {
   width: 100%;
-  margin-top: 10px; /* Espacio entre la fecha y la tabla */
+  margin-top: 10px;
+  /* Espacio entre la fecha y la tabla */
   border-collapse: collapse;
 }
 
-.table th, .table td {
+.table th,
+.table td {
   padding: 8px;
 
 }
@@ -127,14 +132,6 @@ h3 {
   background-color: #0056b3;
 }
 
-/* Estilos para las filas de disponibilidad y no disponibilidad */
-.tablacolores{
-  background-color: #106e26;
-}
-
-.colorestabla{
-  background-color: #474040;
-}
 
 footer {
   background-color: #343a40;
@@ -142,6 +139,3 @@ footer {
   margin-top: 30px;
 
 }
-
-
-

@@ -1,6 +1,8 @@
 // Capturamos el formulario de registro
 const registroForm = document.getElementById("registroForm");
 
+const usuarios = []
+
 // Agregamos el evento submit para el formulario de registro
 registroForm.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -12,7 +14,7 @@ registroForm.addEventListener("submit", (e) => {
     const confirmarContraseña = document.getElementById("confirmar_contraseña").value;
 
     // Verificamos si el usuario ya existe en localStorage
-    const usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
+    // const usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
 
     const usuarioExistente = usuarios.find((user) => user.nombre === nombre);
 
@@ -52,4 +54,19 @@ function mostrarMensajeRegistro(mensaje) {
     mensajeRegistro.textContent = mensaje;
 }
 
-// Ahora, puedes utilizar el código de inicio de sesión anterior para manejar el inicio de sesión de usuarios
+const fetchData = async () => {
+    try {
+        const res = await fetch('../JSON/usuarios.json');
+
+        const data = await res.json();
+
+        usuarios.push(...data)
+
+    } catch (error) {
+        console.error('Error al cargar datos:', error);
+    }
+}
+
+window.addEventListener('load', () => {
+    fetchData();
+});

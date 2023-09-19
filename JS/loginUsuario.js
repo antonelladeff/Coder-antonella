@@ -1,7 +1,7 @@
-const arrayUsuarios = JSON.parse (localStorage.getItem("usuario")) || usuarios ;
+const arrayUsuarios = []
 
 // Capturamos el formulario
-const inicioFormulario = document.getElementById("inicio") 
+const inicioFormulario = document.getElementById("inicio")
 
 // Función para mostrar errores en el formulario
 const mostrarMensaje = (text) => {
@@ -24,7 +24,7 @@ inicioFormulario.addEventListener("submit", (e) => {
     // Capturamos el input contraseña
     const contraseña = document.getElementById("password").value; // Capturamos la contraseña
     // Buscamos si hay algún usuario que coincida con el nombre que ingresaron
-    const user = usuarios.find((user) => user.nombre === nombre);
+    const user = arrayUsuarios.find((user) => user.nombre === nombre);
     // Si existe el usuario, revisamos su contraseña
     if (user) {
         // Si la contraseña es correcta, se redirecciona a la página que queramos
@@ -37,7 +37,7 @@ inicioFormulario.addEventListener("submit", (e) => {
             }
             localStorage.setItem("nombreUsuario", nombre);
 
-           location.href = "./paginas/turnero.html";
+            location.href = "./paginas/turnero.html";
         } else {
             // Si la contraseña es incorrecta, mostramos un mensaje
             mostrarMensaje("Contraseña incorrecta.");
@@ -55,4 +55,23 @@ function isLogueIn() {
     } else {
         return;
     }
-} 
+}
+const fetchData = async () => {
+    try {
+        const res = await fetch('../JSON/usuarios.json');
+
+
+        const data = await res.json();
+
+
+        arrayUsuarios.push(...data)
+
+    } catch (error) {
+        console.error('Error al cargar datos:', error);
+    }
+}
+
+
+window.addEventListener('load', () => {
+    fetchData();
+});
