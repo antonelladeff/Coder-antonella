@@ -53,20 +53,3 @@ function mostrarMensajeRegistro(mensaje) {
     const mensajeRegistro = document.getElementById("mensajeRegistro");
     mensajeRegistro.textContent = mensaje;
 }
-
-const fetchData = async () => {
-    try {
-        const res = await fetch('../JSON/usuarios.json');
-
-        const data = await res.json();
-
-        usuarios.push(...data)
-
-    } catch (error) {
-        console.error('Error al cargar datos:', error);
-    }
-}
-
-window.addEventListener('load', () => {
-    fetchData();
-});

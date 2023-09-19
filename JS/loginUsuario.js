@@ -1,4 +1,4 @@
-const arrayUsuarios = []
+const arrayUsuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
 
 // Capturamos el formulario
 const inicioFormulario = document.getElementById("inicio")
@@ -51,7 +51,7 @@ inicioFormulario.addEventListener("submit", (e) => {
 function isLogueIn() {
     const loguedIn = JSON.parse(localStorange.getItem('isLogued'))
     if (loguedIn.isLogued) {
-        location.href = "./paginas/turnero.html";
+        location.href = ".//paginas/turnero.html";
     } else {
         return;
     }

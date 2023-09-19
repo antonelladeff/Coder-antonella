@@ -1,37 +1,40 @@
-[
+const turnos = [
     {
-        "horario": "08:00 AM",
-        "reservado": true,
-        "paciente": "Vales Soraya"
+        "id": 0,
+        "horario": "08:00HS",
+        "doctor": "bartels",
+        "disponible": true
     },
     {
-        "horario": "09:00 AM",
-        "reservado": true,
-        "paciente": "Rivera Claudio"
+        "id": 1,
+        "horario": "10:00HS",
+        "doctor": "bartels",
+        "disponible": false
     },
     {
-        "horario": "12:00 PM",
-        "reservado": false,
-        "paciente": "Fla Angela"
+        "id": 2,
+        "horario": "13:00HS",
+        "doctor": "bartels",
+        "disponible": true
     },
     {
-        "horario": "15:00 PM",
-        "reservado": false,
-        "paciente": "Lend Alejandro"
+        "id": 3,
+        "horario": "17:00HS",
+        "doctor": "bartels",
+        "disponible": false
     },
     {
-        "horario": "17:00 PM",
-        "reservado": true,
-        "paciente": "Rodriguez Benjamin"
+        "id": 4,
+        "horario": "20:00HS",
+        "doctor": "bartels",
+        "disponible": true
     },
     {
-        "horario": "21:00 PM",
-        "reservado": false,
-        "paciente": "Ganga Maria"
-    },
-    {
-        "horario": "22:00 PM",
-        "reservado": false,
-        "paciente": "Hand Gabriel"
+        "id": 5,
+        "horario": "22:00HS",
+        "doctor": "bartels",
+        "disponible": false
     }
-]
+];
+
+

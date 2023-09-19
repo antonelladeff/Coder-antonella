@@ -1,3 +1,24 @@
+const container = document.getElementById('contenedor-botones');
+turnos.forEach(el => {
+    const tr = document.createElement('tr');
+
+    tr.innerHTML = `<tr class="table-success">
+                    <td><button id="${el.id}" class="btn btn-primary horario-btn">${el.horario}</button></td>
+                    <td>${el.disponible ? 'disponible' : 'no disponible'}</td>
+                    </tr>`
+
+    container.appendChild(tr);
+
+    const button = document.getElementById(`${el.id}`);
+    //button.setAttribute('class', `${el.disponible}`)
+    if (!el.disponible) {
+        button.setAttribute('disabled', 'true');
+    }
+    button.addEventListener('click', () => mostrarModal(el.horario))
+    console.log(button);
+})
+
+
 // Función para mostrar el modal con los datos seleccionados
 function mostrarModal(horario) {
     // Obtener la fecha seleccionada
@@ -14,14 +35,8 @@ function mostrarModal(horario) {
         return;
     }
 
-    // Establece el valor del campo de tiempo en el modal
-    document.getElementById("horaSeleccionada").textContent = horario;
-    // Abre el modal
-    $('#myModal').modal('show');
 
     const formularioreserva = document.getElementById("formularioreservas")
-
-
 
 
     // Agrega un evento de clic al botón de reserva dentro del modal
@@ -83,34 +98,14 @@ function mostrarModal(horario) {
     });
 }
 
-// Declarar la variable horarioSeleccionado fuera de la función forEach
-let horarioSeleccionado;
 
-// Agrega un evento de clic a los botones de horario
-const horarioButtons = document.querySelectorAll(".horario-btn");
-horarioButtons.forEach(button => {
-    button.addEventListener("click", function () {
-        const horario = this.textContent;
-        const disponibilidad = this.parentNode.nextElementSibling.textContent;
-
-        // Verifica si el botón está disponible antes de mostrar el modal
-        if (disponibilidad === "Disponible") {
-            // Guarda una referencia al botón seleccionado
-            horarioSeleccionado = this;
-
-            // Muestra el modal y asigna el horario seleccionado
-            mostrarModal(horario);
-        }
-    });
-});
 
 // Verificar si hay una reserva guardada en localStorage al cargar la página
 document.addEventListener('DOMContentLoaded', function () {
     const reservaGuardada = localStorage.getItem('reserva');
 
     if (reservaGuardada) {
-        // Puedes realizar acciones adicionales aquí si es necesario
-        // Por ejemplo, llenar campos del formulario con los datos de la reserva.
+
     }
 });
 
