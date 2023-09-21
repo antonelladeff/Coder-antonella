@@ -51,6 +51,9 @@ function fetchTurnos(turnos) {
 function mostrarModal(horario, id, reservado) {
 
     const fecha = document.getElementById('fecha').value;
+    const horarioSel = document.getElementById("horaSeleccionada")
+    console.log(horarioSel)
+
     if (!fecha) {
         // Mostrar un mensaje de error si no se ha seleccionado una fecha
         Swal.fire({
@@ -67,6 +70,8 @@ function mostrarModal(horario, id, reservado) {
     const modal = document.getElementById('myModal');
 
     $(modal).modal('show');
+
+    horarioSel.innerText = `${horario}`;
 
     // Agregar un evento clic al botón de reserva en el modal
     document.getElementById("reservarBtnModal").addEventListener("click", function () {
