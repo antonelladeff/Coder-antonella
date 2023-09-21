@@ -1,31 +1,58 @@
+// Obtener el elemento del contenedor de botones
 const container = document.getElementById('contenedor-botones');
-turnos.forEach(el => {
-    const tr = document.createElement('tr');
 
-    tr.innerHTML = `<tr class="table-success">
-                    <td><button id="${el.id}" class="btn btn-primary horario-btn">${el.horario}</button></td>
-                    <td>${el.disponible ? 'disponible' : 'no disponible'}</td>
-                    </tr>`
+// Obtener las reservas desde el almacenamiento local o inicializar un array vacío si no hay datos
+let reservas = JSON.parse(localStorage.getItem('reservas')) || [];
 
-    container.appendChild(tr);
+// Función asincrónica para cargar datos desde un archivo JSON
+const fetchData = async () => {
+    try {
 
-    const button = document.getElementById(`${el.id}`);
-    //button.setAttribute('class', `${el.disponible}`)
-    if (!el.disponible) {
-        button.setAttribute('disabled', 'true');
+        const res = await fetch("../JSON/reservas.json");
+
+        const data = await res.json();
+
+        fetchTurnos(data);
+    } catch (error) {
+
+        console.error('Error al cargar datos:', error);
     }
-    button.addEventListener('click', () => mostrarModal(el.horario))
-    console.log(button);
-})
+}
 
+// Función para mostrar los turnos en la página
+function fetchTurnos(turnos) {
+    turnos.forEach(el => {
 
-// Función para mostrar el modal con los datos seleccionados
-function mostrarModal(horario) {
-    // Obtener la fecha seleccionada
+        const reservado = reservas.some(reserva => reserva.horario === el.horario);
+
+        const tr = document.createElement('tr');
+
+        tr.innerHTML = `
+            <tr class="table-success">
+                <td><button id="${el.id}" class="btn btn-primary horario-btn">${el.horario}</button></td>
+                <td>${el.disponible && !reservado ? 'disponible' : 'no disponible'}</td>
+            </tr>
+        `;
+
+        container.appendChild(tr);
+
+        const button = document.getElementById(`${el.id}`);
+        // Deshabilitar el botón si no está disponible o ya está reservado
+        if (!el.disponible || reservado) {
+            button.setAttribute('disabled', 'true');
+        }
+
+        // Agregar un evento clic al botón para mostrar el modal de reserva
+        button.addEventListener('click', () => mostrarModal(el.horario, el.id, reservado));
+    });
+}
+
+// Función para mostrar el modal de reserva
+function mostrarModal(horario, id, reservado) {
+
     const fecha = document.getElementById('fecha').value;
-
     if (!fecha) {
-        // Si la fecha no está seleccionada, muestra un mensaje de error
+        // Mostrar un mensaje de error si no se ha seleccionado una fecha
         Swal.fire({
             title: 'Error',
             text: 'Debes seleccionar primero la fecha del turno.',
@@ -35,20 +62,22 @@ function mostrarModal(horario) {
         return;
     }
 
+    // Obtener elementos del formulario de reserva y el modal
+    const formularioreserva = document.getElementById("formularioreservas");
+    const modal = document.getElementById('myModal');
 
-    const formularioreserva = document.getElementById("formularioreservas")
+    $(modal).modal('show');
 
-
-    // Agrega un evento de clic al botón de reserva dentro del modal
+    // Agregar un evento clic al botón de reserva en el modal
     document.getElementById("reservarBtnModal").addEventListener("click", function () {
-        // Obtener los valores de los campos de input dentro del modal
+
         const nombre = document.getElementById('nombre').value;
         const apellido = document.getElementById('apellido').value;
         const obraSocial = document.getElementById('obraSocial').value;
         const telefono = document.getElementById('telefono').value;
 
         if (!nombre || !apellido || !obraSocial || !telefono) {
-            // Si alguno de los campos no está completo, muestra un mensaje de error
+            // Mostrar un mensaje de error si no se completan todos los campos del formulario
             Swal.fire({
                 title: 'Error',
                 text: 'Debes completar todos los campos antes de reservar el turno.',
@@ -58,7 +87,7 @@ function mostrarModal(horario) {
             return;
         }
 
-        // Crear un objeto con los datos de la reserva
+        // Crear un objeto de reserva
         const reserva = {
             horario: horario,
             nombre: nombre,
@@ -67,11 +96,10 @@ function mostrarModal(horario) {
             telefono: telefono
         };
 
-
-        // Muestra la ventana modal de confirmación usando Swal
+        // Mostrar un mensaje de confirmación antes de reservar
         Swal.fire({
             title: '¿Estás seguro?',
-            text: `Deseas reservar un turno a las ${horario} para ${nombre} ${apellido} con obra social ${obraSocial} y teléfono ${telefono}?`,
+            text: `Deseas reservar un turno a las ${horario} para ${nombre} ${apellido} con obra social ${obraSocial} y teléfono ${telefono} ? `,
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -79,34 +107,32 @@ function mostrarModal(horario) {
             confirmButtonText: 'Sí, reservar'
         }).then((result) => {
             if (result.isConfirmed) {
-                // Mostrar mensaje de éxito con Swal
+                // Mostrar un mensaje de éxito después de la reserva
                 Swal.fire(
                     '¡Reservado!',
                     'Tu turno ha sido reservado correctamente.',
                     'success'
                 );
-
+                // Ocultar el modal
                 $('#myModal').modal('hide');
-                // Guardar la reserva en localStorage
-                localStorage.setItem('reserva', JSON.stringify(reserva));
-                formularioreserva.reset(); // Limpiar el formulario después de un registro exitoso
-                // Deshabilita el botón de horario seleccionado
-                horarioSeleccionado.setAttribute("disabled", "true");
 
+                // Agregar la reserva al array si no está reservado previamente
+                if (!reservado) {
+                    reservas.push(reserva);
+                    // Actualizar los datos de reserva en el almacenamiento local
+                    localStorage.setItem('reservas', JSON.stringify(reservas));
+                }
+
+                // Restablecer el formulario de reserva
+                formularioreserva.reset();
+                // Deshabilitar el botón de reserva en la tabla
+                const button = document.getElementById(id);
+                button.setAttribute("disabled", "true");
             }
         });
     });
 }
 
-
-
-// Verificar si hay una reserva guardada en localStorage al cargar la página
-document.addEventListener('DOMContentLoaded', function () {
-    const reservaGuardada = localStorage.getItem('reserva');
-
-    if (reservaGuardada) {
-
-    }
-});
-
+// Cargar datos al cargar la página
+fetchData();
 

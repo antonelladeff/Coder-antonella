@@ -1,4 +1,4 @@
-const turnos = [
+[
     {
         "id": 0,
         "horario": "08:00HS",
@@ -35,6 +35,4 @@ const turnos = [
         "doctor": "bartels",
         "disponible": false
     }
-];
-
-
+]

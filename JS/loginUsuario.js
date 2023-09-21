@@ -58,13 +58,16 @@ function isLogueIn() {
 }
 const fetchData = async () => {
     try {
-        const res = await fetch('../JSON/usuarios.json');
-
+        const res = await fetch('./JSON/usuarios.json')
 
         const data = await res.json();
 
 
         arrayUsuarios.push(...data)
+
+        if (!localStorage.getItem('usuarios')) {
+            localStorage.setItem('usuarios', JSON.stringify(data));
+        }
 
     } catch (error) {
         console.error('Error al cargar datos:', error);

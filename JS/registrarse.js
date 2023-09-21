@@ -1,7 +1,6 @@
 // Capturamos el formulario de registro
 const registroForm = document.getElementById("registroForm");
 
-const usuarios = []
 
 // Agregamos el evento submit para el formulario de registro
 registroForm.addEventListener("submit", (e) => {
@@ -14,7 +13,7 @@ registroForm.addEventListener("submit", (e) => {
     const confirmarContraseña = document.getElementById("confirmar_contraseña").value;
 
     // Verificamos si el usuario ya existe en localStorage
-    // const usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
+    const usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
 
     const usuarioExistente = usuarios.find((user) => user.nombre === nombre);
 
