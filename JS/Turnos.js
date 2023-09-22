@@ -7,14 +7,10 @@ let reservas = JSON.parse(localStorage.getItem('reservas')) || [];
 // Función asincrónica para cargar datos desde un archivo JSON
 const fetchData = async () => {
     try {
-
         const res = await fetch("../JSON/reservas.json");
-
         const data = await res.json();
-
         fetchTurnos(data);
     } catch (error) {
-
         console.error('Error al cargar datos:', error);
     }
 }
@@ -22,15 +18,13 @@ const fetchData = async () => {
 // Función para mostrar los turnos en la página
 function fetchTurnos(turnos) {
     turnos.forEach(el => {
-
         const reservado = reservas.some(reserva => reserva.horario === el.horario);
-
         const tr = document.createElement('tr');
 
         tr.innerHTML = `
             <tr class="table-success">
                 <td><button id="${el.id}" class="btn btn-primary horario-btn">${el.horario}</button></td>
-                <td>${el.disponible && !reservado ? 'disponible' : 'no disponible'}</td>
+                <td><span id="estado-${el.id}" class="texttodisp ${el.disponible && !reservado ? 'disponible' : 'no-disponible'}">${el.disponible && !reservado ? 'Disponible' : 'No disponible'}</span></td>
             </tr>
         `;
 
@@ -43,16 +37,34 @@ function fetchTurnos(turnos) {
         }
 
         // Agregar un evento clic al botón para mostrar el modal de reserva
-        button.addEventListener('click', () => mostrarModal(el.horario, el.id, reservado));
+        button.addEventListener('click', () => {
+            if (!el.disponible || reservado) {
+                Swal.fire({
+                    title: 'Turno no disponible',
+                    text: 'Este turno ya no está disponible',
+                    icon: 'warning',
+                    confirmButtonText: 'Aceptar'
+                });
+            } else {
+                mostrarModal(el.horario, el.id, reservado, button);
+            }
+        });
+
+        // Aplicar clases CSS según el estado del turno
+        const estadoSpan = document.querySelector(`#estado-${el.id}`);
+        if (el.disponible && !reservado) {
+            estadoSpan.classList.add('disponible');
+        } else {
+            estadoSpan.classList.add('no-disponible');
+        }
     });
 }
 
 // Función para mostrar el modal de reserva
-function mostrarModal(horario, id, reservado) {
-
+function mostrarModal(horario, id, reservado, button) {
     const fecha = document.getElementById('fecha').value;
-    const horarioSel = document.getElementById("horaSeleccionada")
-    console.log(horarioSel)
+    const horarioSel = document.getElementById("horaSeleccionada");
+    console.log(horarioSel);
 
     if (!fecha) {
         // Mostrar un mensaje de error si no se ha seleccionado una fecha
@@ -75,7 +87,6 @@ function mostrarModal(horario, id, reservado) {
 
     // Agregar un evento clic al botón de reserva en el modal
     document.getElementById("reservarBtnModal").addEventListener("click", function () {
-
         const nombre = document.getElementById('nombre').value;
         const apellido = document.getElementById('apellido').value;
         const obraSocial = document.getElementById('obraSocial').value;
@@ -131,8 +142,11 @@ function mostrarModal(horario, id, reservado) {
                 // Restablecer el formulario de reserva
                 formularioreserva.reset();
                 // Deshabilitar el botón de reserva en la tabla
-                const button = document.getElementById(id);
                 button.setAttribute("disabled", "true");
+                const estadoSpan = document.querySelector(`#estado-${id}`);
+                estadoSpan.textContent = 'no disponible';
+                estadoSpan.classList.remove('disponible');
+                estadoSpan.classList.add('no-disponible');
             }
         });
     });
@@ -140,4 +154,3 @@ function mostrarModal(horario, id, reservado) {
 
 // Cargar datos al cargar la página
 fetchData();
-

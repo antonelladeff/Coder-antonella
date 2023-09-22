@@ -44,12 +44,12 @@ main {
 }
 
 .text-danger {
-  color: #dc3545;
+  color: #eb081f;
 }
 
 /* Estilo general para los profesionales */
 .profesional {
-  background-color: #f5f5f5;
+  background-color: #d32828;
   border: 1px solid #ccc;
   padding: 30px;
   margin: 30px;
@@ -117,14 +117,20 @@ h3 {
   font-weight: bold;
 }
 
+/* Estilos para los estados "Disponible" */
 .disponible {
-  background-color: green;
-  /* Color para disponible */
+  color: green;
+  /* Color de texto verde */
+  font-weight: bold;
+  /* Texto en negrita */
 }
 
+/* Estilos para los estados "No disponible" */
 .no-disponible {
-  background-color: red;
-  /* Color para no disponible */
+  color: red;
+  /* Color de texto rojo */
+  font-weight: bold;
+  /* Texto en negrita */
 }
 
 /* Estilos para los botones de horarios */

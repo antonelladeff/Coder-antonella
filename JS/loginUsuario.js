@@ -19,16 +19,12 @@ const mostrarMensaje = (text) => {
 inicioFormulario.addEventListener("submit", (e) => {
     // Prevenimos que se recargue la página
     e.preventDefault();
-    // Capturamos el input nombre
     const nombre = document.getElementById("nombre").value;
-    // Capturamos el input contraseña
-    const contraseña = document.getElementById("password").value; // Capturamos la contraseña
-    // Buscamos si hay algún usuario que coincida con el nombre que ingresaron
+    const contraseña = document.getElementById("password").value;
     const user = arrayUsuarios.find((user) => user.nombre === nombre);
     // Si existe el usuario, revisamos su contraseña
     if (user) {
-        // Si la contraseña es correcta, se redirecciona a la página que queramos
-        if (contraseña === user.password) { // Comparamos la contraseña
+        if (contraseña === user.password) {
             // Guardar el nombre de usuario y contraseña en localStorage
             const loguedIn = {
                 nombre: user.nombre,
