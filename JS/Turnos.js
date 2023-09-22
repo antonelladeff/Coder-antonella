@@ -144,7 +144,7 @@ function mostrarModal(horario, id, reservado, button) {
                 // Deshabilitar el botón de reserva en la tabla
                 button.setAttribute("disabled", "true");
                 const estadoSpan = document.querySelector(`#estado-${id}`);
-                estadoSpan.textContent = 'no disponible';
+                estadoSpan.textContent = 'No disponible';
                 estadoSpan.classList.remove('disponible');
                 estadoSpan.classList.add('no-disponible');
             }

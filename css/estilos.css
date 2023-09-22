@@ -1,9 +1,8 @@
-/* Estilos personalizados */
-
 body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+/* Header */
 header {
   background-color: #007bff;
 
@@ -13,6 +12,7 @@ header {
   margin-right: 10px;
 }
 
+/* Main*/
 main {
   min-height: 78vh
 }
@@ -43,95 +43,78 @@ main {
   border-color: #0056b3;
 }
 
+.card-title.text-center.mb-4 {
+  font-size: 24px;
+  color: #333;
+  text-align: center;
+  margin-bottom: 20px;
+
+}
+
+.small-heading {
+  font-size: 22px;
+  font-weight: bold;
+
+}
+
+/* Boton Cerrar Sesion */
 .text-danger {
   color: #eb081f;
 }
 
-/* Estilo general para los profesionales */
+
 .profesional {
-  background-color: #d32828;
-  border: 1px solid #ccc;
-  padding: 30px;
-  margin: 30px;
+  background-color: #f5f5f5;
+  padding: 20px;
+  margin: 20px;
   text-align: center;
-  justify-content: center;
+  border: 2px solid #007bff;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 
 }
-
 
 .reservar-btn {
+  display: inline-block;
+  padding: 10px 10px;
   background-color: #007bff;
-  color: white;
+  color: #fff;
+  text-decoration: none;
   border: none;
-  padding: 10px 20px;
-
-
-}
-
-.profe {
-  text-align: center;
-  font-size: 40px;
-  font-weight: bolder;
+  border-radius: 5px;
 
 }
 
-/* Estilo para los botones de reserva al pasar el ratón por encima */
 .reservar-btn:hover {
   background-color: #0056b3;
-  ;
+  color: #fff;
+
 }
 
 
-
-/* Estilos para el elemento de fecha */
-#fecha {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 16px;
-}
-
-/* Estilos para el encabezado "Horarios" */
-h3 {
+.profe {
+  font-size: 40px;
+  padding-top: 40px;
   color: #333;
-  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 40px;
+  text-align: center;
+
 }
 
-/* Estilos para la tabla de horarios */
-.table {
+.card {
+  max-width: 500px;
+
+  margin: 0 auto;
+
+}
+
+.form-control {
   width: 100%;
-  margin-top: 10px;
-  /* Espacio entre la fecha y la tabla */
-  border-collapse: collapse;
-}
-
-.table th,
-.table td {
-  padding: 8px;
 
 }
 
-.table th {
-  background-color: #f2f2f2;
-  font-weight: bold;
-}
-
-/* Estilos para los estados "Disponible" */
-.disponible {
-  color: green;
-  /* Color de texto verde */
-  font-weight: bold;
-  /* Texto en negrita */
-}
-
-/* Estilos para los estados "No disponible" */
-.no-disponible {
-  color: red;
-  /* Color de texto rojo */
-  font-weight: bold;
-  /* Texto en negrita */
-}
 
 /* Estilos para los botones de horarios */
 .btn-primary {
@@ -144,11 +127,23 @@ h3 {
 
 }
 
-.btn-primary:hover {
-  background-color: #0056b3;
+
+
+/* Estilos para los estados "Disponible" */
+.disponible {
+  color: green;
+  font-weight: bold;
+
 }
 
+/* Estilos para los estados "No disponible" */
+.no-disponible {
+  color: red;
+  font-weight: bold;
 
+}
+
+/* Footer */
 footer {
   background-color: #343a40;
   color: #fff;
